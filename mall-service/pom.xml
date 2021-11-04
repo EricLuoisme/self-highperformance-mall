@@ -22,4 +22,20 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <!-- jar dependency -->
+        <dependency>
+            <groupId>com.highperformance</groupId>
+            <artifactId>mall-service-dependency</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!-- tools dependency -->
+        <dependency>
+            <groupId>com.highperformance</groupId>
+            <artifactId>mall-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>
