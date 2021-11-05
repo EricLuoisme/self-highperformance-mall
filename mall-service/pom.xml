@@ -9,6 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <modules>
+        <module>mall-goods-service</module>
+    </modules>
+
     <artifactId>mall-service</artifactId>
 
     <packaging>pom</packaging>
