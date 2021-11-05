@@ -6,6 +6,8 @@ import com.self.highperformance.goods.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/brand")
 public class BrandController {
@@ -31,4 +33,9 @@ public class BrandController {
         return removeById ? RespResult.ok() : RespResult.error("Remove error");
     }
 
+    @PostMapping("/search")
+    public RespResult<List<BrandModel>> queryList(@RequestBody BrandModel brandModel) {
+        List<BrandModel> brandModels = brandService.queryList(brandModel);
+        return RespResult.ok(brandModels);
+    }
 }
