@@ -1,5 +1,6 @@
 package com.self.highperformance.goods.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.self.highperformance.RespResult;
 import com.self.highperformance.goods.model.BrandModel;
 import com.self.highperformance.goods.service.BrandService;
@@ -37,5 +38,14 @@ public class BrandController {
     public RespResult<List<BrandModel>> queryList(@RequestBody BrandModel brandModel) {
         List<BrandModel> brandModels = brandService.queryList(brandModel);
         return RespResult.ok(brandModels);
+    }
+
+    @PostMapping("/search/{page}/{size}")
+    public RespResult<Page<BrandModel>> queryPageList(@PathVariable("page") Long current,
+                                                      @PathVariable("size") Long size,
+                                                      @RequestBody BrandModel brandModel) {
+        // 分页查询
+        Page<BrandModel> brandModelPage = brandService.queryPageList(brandModel, current, size);
+        return RespResult.ok(brandModelPage);
     }
 }
