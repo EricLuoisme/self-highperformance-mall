@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "brand")
-public class Brand {
+public class BrandModel {
 
     /** 主键id */
     @TableId(type = IdType.AUTO)
