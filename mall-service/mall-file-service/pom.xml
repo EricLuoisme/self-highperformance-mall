@@ -27,12 +27,12 @@
             <artifactId>rados</artifactId>
             <version>0.6.0</version>
         </dependency>
-        <!-- Ceph 文件系统依赖 -->
-        <dependency>
-            <groupId>io.github.opendataio</groupId>
-            <artifactId>libcephfs</artifactId>
-            <version>0.0.1</version>
-        </dependency>
+<!--        &lt;!&ndash; Ceph 文件系统依赖 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.github.opendataio</groupId>-->
+<!--            <artifactId>libcephfs</artifactId>-->
+<!--            <version>0.0.1</version>-->
+<!--        </dependency>-->
         <!-- Ceph 文件系统依赖 -->
         <dependency>
             <groupId>com.ceph</groupId>
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>org.javaswift</groupId>
             <artifactId>joss</artifactId>
-            <version>0.10.4</version>
+            <version>0.10.2</version>
         </dependency>
 
     </dependencies>
