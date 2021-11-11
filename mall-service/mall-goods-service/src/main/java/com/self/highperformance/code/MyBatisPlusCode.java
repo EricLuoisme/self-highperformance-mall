@@ -34,7 +34,7 @@ public class MyBatisPlusCode {
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName("mall-goods");
-        pc.setParent("com.highperformance.code");
+        pc.setParent("com.highper.performance.code");
         mpg.setPackageInfo(pc);
 
         // 策略配置
