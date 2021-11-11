@@ -40,7 +40,11 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
 
     @Override
     public List<Brand> queryByCategoryId(Integer id) {
-        // 自写复杂sql
-        return brandMapper.queryByCategoryId(id);
+        // 分解Sql
+        List<Integer> brands = brandMapper.queryByCategoryId(id);
+        if (null != brands && brands.size() > 0) {
+            return brandMapper.selectList(new QueryWrapper<Brand>().in("id", brands));
+        }
+        return null;
     }
 }
