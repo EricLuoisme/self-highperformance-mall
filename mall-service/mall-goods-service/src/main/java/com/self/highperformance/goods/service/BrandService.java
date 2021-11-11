@@ -2,20 +2,20 @@ package com.self.highperformance.goods.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.self.highperformance.goods.model.BrandModel;
+import com.self.highperformance.goods.model.Brand;
 
 import java.util.List;
 
-public interface BrandService extends IService<BrandModel> {
+public interface BrandService extends IService<Brand> {
 
     /**
      * 条件查询
      */
-    List<BrandModel> queryList(BrandModel model);
+    List<Brand> queryList(Brand model);
 
     /**
      * 分页条件查询
      */
-    Page<BrandModel> queryPageList(BrandModel model, Long currentPage, Long size);
+    Page<Brand> queryPageList(Brand model, Long currentPage, Long size);
 
 }

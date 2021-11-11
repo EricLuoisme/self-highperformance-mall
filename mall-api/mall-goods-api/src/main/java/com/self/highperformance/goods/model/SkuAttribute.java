@@ -1,34 +1,33 @@
 package com.self.highperformance.goods.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Brand实体
- */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@TableName(value = "brand")
-public class BrandModel {
+import java.io.Serializable;
+import java.util.List;
 
-    /** 主键id */
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName(value = "sku_attribute")
+public class SkuAttribute implements Serializable {
+
     @TableId(type = IdType.AUTO)
     private Integer id;
-
-    /** 品牌名称 */
     private String name;
-
-    /** 品牌图片 */
-    private String image;
-
-    /** 品牌首字母 */
-    private String initial;
-
-    /** 排序 */
+    private String options;
     private Integer sort;
+
+    /**
+     * 仅存在于Dto的属性
+     */
+    @TableField(exist = false)
+    private List<Category> categories;
+
 }

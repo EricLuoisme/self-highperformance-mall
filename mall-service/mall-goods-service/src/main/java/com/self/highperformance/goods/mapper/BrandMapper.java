@@ -1,8 +1,8 @@
 package com.self.highperformance.goods.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.self.highperformance.goods.model.BrandModel;
+import com.self.highperformance.goods.model.Brand;
 
-public interface BrandMapper extends BaseMapper <BrandModel>{
+public interface BrandMapper extends BaseMapper <Brand>{
 
 }
