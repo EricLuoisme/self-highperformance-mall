@@ -8,23 +8,16 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>mall-api</artifactId>
+    <packaging>pom</packaging>
 
     <modules>
         <module>mall-goods-api</module>
     </modules>
 
-    <artifactId>mall-api</artifactId>
-
-    <packaging>pom</packaging>
-
     <description>
         For all Entities and Feign APIs
     </description>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
 
     <dependencies>
         <!-- MyBatis plus 在此仅做编译操作 -->

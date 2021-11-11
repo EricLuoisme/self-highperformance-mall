@@ -1,8 +1,8 @@
 package com.self.highperformance.goods.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.self.highperformance.RespResult;
 import com.self.highperformance.goods.model.BrandModel;
+import com.self.highperformance.resp.RespResult;
 import com.self.highperformance.goods.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

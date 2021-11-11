@@ -1,4 +1,4 @@
-package com.self.highperformance;
+package com.self.highperformance.resp;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
