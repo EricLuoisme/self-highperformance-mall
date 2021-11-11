@@ -16,6 +16,10 @@ public class BrandController {
     @Autowired
     BrandService brandService;
 
+    /**
+     * Brand表相关
+     */
+
     @PostMapping
     public RespResult add(@RequestBody Brand brand) {
         boolean save = brandService.save(brand);
@@ -47,5 +51,15 @@ public class BrandController {
         // 分页查询
         Page<Brand> brandModelPage = brandService.queryPageList(brand, current, size);
         return RespResult.ok(brandModelPage);
+    }
+
+    /**
+     * Category表相关
+     */
+
+    @GetMapping("/category/{pid}")
+    public RespResult<List<Brand>> categoryBrands(@PathVariable("pid") Integer pid) {
+        List<Brand> brands = brandService.queryByCategoryId(pid);
+        return RespResult.ok(brands);
     }
 }

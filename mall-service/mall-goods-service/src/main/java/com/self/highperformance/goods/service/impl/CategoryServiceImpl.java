@@ -19,8 +19,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     @Override
     public List<Category> findByParentId(Integer pid) {
-        QueryWrapper<Category> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("parent_id", pid);
-        return categoryMapper.selectList(queryWrapper);
+        return categoryMapper.selectList(
+                new QueryWrapper<Category>().eq("parent_id", pid));
     }
 }
