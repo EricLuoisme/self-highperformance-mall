@@ -24,6 +24,12 @@ public class SkuController {
         return RespResult.ok(skus);
     }
 
+    @PutMapping("/aditems/type")
+    public RespResult<List<Sku>> updTypeItems(@RequestParam("id") Integer id) {
+        skuService.updTypeSkuItems(id);
+        return RespResult.ok();
+    }
+
 
     /**
      * 清除缓存

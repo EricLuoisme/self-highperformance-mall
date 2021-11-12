@@ -9,6 +9,7 @@ import com.self.highperformance.goods.model.Sku;
 import com.self.highperformance.goods.service.SkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +29,21 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     @Cacheable(cacheNames = "ad-items-skus", key = "#id")
     @Override
     public List<Sku> typeSkuItems(Integer id) {
-        System.out.println("查询数据库");
         // 1. 查询当前分类下所有列表信息
         List<AdItems> adItems = adItemsMapper.selectList(new QueryWrapper<AdItems>().eq("type", id));
-        List<String> skuIds = adItems.stream().map(x -> x.getSkuId()).collect(Collectors.toList());
+        List<String> skuIds = adItems.stream().map(AdItems::getSkuId).collect(Collectors.toList());
         // 2. 根据列表查询商品列表
-        return null == skuIds ? null : skuMapper.selectBatchIds(skuIds);
+        return skuIds.isEmpty() ? null : skuMapper.selectBatchIds(skuIds);
+    }
+
+    @CachePut(cacheNames = "ad-items-skus", key = "#id")
+    @Override
+    public List<Sku> updTypeSkuItems(Integer id) {
+        // 1. 查询当前分类下所有列表信息
+        List<AdItems> adItems = adItemsMapper.selectList(new QueryWrapper<AdItems>().eq("type", id));
+        List<String> skuIds = adItems.stream().map(AdItems::getSkuId).collect(Collectors.toList());
+        // 2. 根据列表查询商品列表
+        return skuIds.isEmpty() ? null : skuMapper.selectBatchIds(skuIds);
     }
 
     @CacheEvict(cacheNames = "ad-items-skus", key = "#id")
