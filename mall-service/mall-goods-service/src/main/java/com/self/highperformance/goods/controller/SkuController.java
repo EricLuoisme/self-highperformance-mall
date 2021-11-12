@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/sku")
 public class SkuController {
@@ -16,12 +17,11 @@ public class SkuController {
     private SkuService skuService;
 
     /**
-     * 根据推广分类查询推广产品列表
+     * 根据推广分类查询推广产品列表, 因为是响应给Nginx缓存, 不使用Resp封装
      */
     @GetMapping("/aditems/type")
-    public RespResult<List<Sku>> typeItems(@RequestParam("id") Integer id) {
-        List<Sku> skus = skuService.typeSkuItems(id);
-        return RespResult.ok(skus);
+    public List<Sku> typeItems(@RequestParam("id") Integer id) {
+        return skuService.typeSkuItems(id);
     }
 
     @PutMapping("/aditems/type")
