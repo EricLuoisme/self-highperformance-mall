@@ -9,4 +9,5 @@ public interface SkuService extends IService<Sku> {
 
     List<Sku> typeSkuItems(Integer id);
 
+    void delTypeSkuItems(Integer id);
 }

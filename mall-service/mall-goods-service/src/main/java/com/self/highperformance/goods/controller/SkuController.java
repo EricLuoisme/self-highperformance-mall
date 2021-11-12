@@ -4,10 +4,7 @@ import com.self.highperformance.goods.model.Sku;
 import com.self.highperformance.goods.service.SkuService;
 import com.self.highperformance.resp.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,4 +25,12 @@ public class SkuController {
     }
 
 
+    /**
+     * 清除缓存
+     */
+    @DeleteMapping("/aditems/type")
+    public RespResult delTypeItems(@RequestParam("id") Integer id) {
+        skuService.delTypeSkuItems(id);
+        return RespResult.ok();
+    }
 }
