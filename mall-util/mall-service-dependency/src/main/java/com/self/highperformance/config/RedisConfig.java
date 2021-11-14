@@ -45,7 +45,7 @@ public class RedisConfig {
         RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisTemplate.getConnectionFactory());
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
                 // 默认缓存生存时间
-                .entryTtl(Duration.ofMinutes(10))
+                .entryTtl(Duration.ofHours(10))
                 // 序列化val使用template配置的
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(redisTemplate.getValueSerializer()));
         return new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
