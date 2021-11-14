@@ -30,7 +30,6 @@ public class SkuController {
         return RespResult.ok();
     }
 
-
     /**
      * 清除缓存
      */

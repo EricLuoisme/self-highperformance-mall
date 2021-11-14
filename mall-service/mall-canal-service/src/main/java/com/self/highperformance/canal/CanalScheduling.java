@@ -24,6 +24,9 @@ public class CanalScheduling implements Runnable, ApplicationContextAware {
     @Autowired
     private CanalConnector canalConnector;
 
+    @Autowired
+    private SkuCanalHandler skuCanalHandler;
+
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -47,6 +50,8 @@ public class CanalScheduling implements Runnable, ApplicationContextAware {
                     if (CanalEntry.EntryType.ROWDATA == entry.getEntryType()) {
                         // 解析处理
                         publishCanalEvent(entry);
+                        // 额外逻辑以实现针对操作执行
+                        skuCanalHandler.eventHandler(entry);
                     }
                 }
             }
@@ -70,7 +75,7 @@ public class CanalScheduling implements Runnable, ApplicationContextAware {
         try {
             change = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
         } catch (InvalidProtocolBufferException e) {
-            log.error("Canal Event: Parsing BinLog Error");
+            log.error("Canal Event: Parsing BinLog Error " + this.getClass().getName());
             e.printStackTrace();
             return;
         }
