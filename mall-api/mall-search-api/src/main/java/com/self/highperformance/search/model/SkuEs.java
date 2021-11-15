@@ -1,6 +1,7 @@
 package com.self.highperformance.search.model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -13,6 +14,7 @@ import java.util.Map;
 // indexName 对应索引名称
 // skues 对应当前表名称
 @Document(indexName = "shopsearch", type = "skues")
+@Accessors(chain = true)
 public class SkuEs {
 
     @Id

@@ -17,19 +17,31 @@
     </properties>
 
     <dependencies>
-        <!-- Canal-Client, v1.1.5开始拆分了protocol出来 -->
+
+        <!--springboot-canal快速构建依赖包-->
         <dependency>
-            <groupId>com.alibaba.otter</groupId>
-            <artifactId>canal.client</artifactId>
-            <version>1.1.4</version>
+            <groupId>top.javatool</groupId>
+            <artifactId>canal-spring-boot-starter</artifactId>
+            <version>1.2.6-RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>top.javatool</groupId>
+            <artifactId>canal-client</artifactId>
+            <version>1.2.6-RELEASE</version>
+        </dependency>
+
+        <!-- Canal-Client, v1.1.5开始拆分了protocol出来 -->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.otter</groupId>-->
+<!--            <artifactId>canal.client</artifactId>-->
+<!--            <version>1.1.4</version>-->
+<!--        </dependency>-->
 <!--        &lt;!&ndash; Canal Protocol &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>com.alibaba.otter</groupId>-->
 <!--            <artifactId>canal.protocol</artifactId>-->
 <!--            <version>1.1.5</version>-->
 <!--        </dependency>-->
-
 
         <dependency>
             <groupId>com.highperformance</groupId>
@@ -41,6 +53,7 @@
             <artifactId>mall-search-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
 
 
     </dependencies>

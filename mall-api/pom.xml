@@ -43,6 +43,14 @@
             <version>2.2.10.RELEASE</version>
         </dependency>
 
+        <!-- JPA, 因为有些驼峰转换的命名问题 -->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+
 
     </dependencies>
 
