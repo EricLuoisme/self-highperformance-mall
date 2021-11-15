@@ -13,6 +13,7 @@
 
     <modules>
         <module>mall-goods-api</module>
+        <module>mall-search-api</module>
     </modules>
 
     <description>

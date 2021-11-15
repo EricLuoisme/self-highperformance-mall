@@ -1,0 +1,25 @@
+
+# ============================================== Spring + Nacos ============================================
+server:
+  port: 8084
+spring:
+  application:
+    name: mall-search
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        # Nacos 自身地址
+        server-addr: 127.0.0.1:8848
+      discovery:
+        # Nacos 注册地址
+        server-addr: 127.0.0.1:8848
+  #Elasticsearch服务配置
+  elasticsearch:
+    rest:
+      uris: http://127.0.0.1:9200
+
+# ================================================== 日志配置 ==================================================
+logging:
+  pattern:
+    console: "%msg%n"
