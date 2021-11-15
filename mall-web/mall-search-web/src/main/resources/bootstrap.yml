@@ -1,0 +1,25 @@
+
+# ============================================== Spring + Nacos + Thymeleaf ============================================
+server:
+  port: 8085
+spring:
+  application:
+    name: mall-websearch
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        # Nacos 自身地址
+        server-addr: 127.0.0.1:8848
+      discovery:
+        # Nacos 注册地址
+        server-addr: 127.0.0.1:8848
+  thymeleaf:
+    cache: false
+    suffix: .html
+    encoding: UTF-8
+    prefix: classpath:/templates/
+#日志配置
+logging:
+  pattern:
+    console: "%msg%n"
