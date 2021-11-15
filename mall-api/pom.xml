@@ -43,7 +43,7 @@
             <version>2.2.10.RELEASE</version>
         </dependency>
 
-        <!-- JPA, 因为有些驼峰转换的命名问题 -->
+        <!-- JPA, 数据库属性下划线转换为驼峰 -->
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>

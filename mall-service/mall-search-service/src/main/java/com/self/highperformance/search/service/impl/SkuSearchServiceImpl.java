@@ -1,10 +1,10 @@
 package com.self.highperformance.search.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.self.highperformance.search.mapper.SkuSearchMapper;
 import com.self.highperformance.search.model.SkuEs;
 import com.self.highperformance.search.service.SkuSearchService;
 import org.apache.commons.lang.StringUtils;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +24,11 @@ public class SkuSearchServiceImpl implements SkuSearchService {
 
     @Override
     public void addIndex(SkuEs skuEs) {
+        // 将Json格式属性转换为map, 方便es子类查询
+        String skuAttribute = skuEs.getSkuAttribute();
+        if (StringUtils.isNotEmpty(skuAttribute)) {
+            skuEs.setAttrMap(JSON.parseObject(skuAttribute, Map.class));
+        }
         skuSearchMapper.save(skuEs);
     }
 

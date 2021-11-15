@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,7 +15,10 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+// 这里是canal-spring-boot-starter, 通过表明绑定表
 @TableName(value = "sku")
+// 这里是JPA中的Table注解
+@Table
 public class Sku implements Serializable {
 
     @TableId(type = IdType.ASSIGN_ID)
@@ -24,6 +28,8 @@ public class Sku implements Serializable {
     private Integer num;
     private String image;
     private String images;
+
+    // 这里使驼峰转换生效
     private Date createTime;
     private Date updateTime;
     private String spuId;
