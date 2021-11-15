@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.self.highperformance.search.mapper.SkuSearchMapper;
 import com.self.highperformance.search.model.SkuEs;
 import com.self.highperformance.search.service.SkuSearchService;
+import com.self.highperformance.search.util.HighlightResultMapper;
 import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -15,6 +16,7 @@ import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
@@ -57,10 +59,9 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         group(queryBuilder, searchMap);
 
         // Mapper进行搜索
-//        Page<SkuEs> search = skuSearchMapper.search(queryBuilder.build());
-        AggregatedPage<SkuEs> page = (AggregatedPage<SkuEs>) skuSearchMapper.search(queryBuilder.build());
-//        AggregatedPage<SkuEs> page = elasticsearchRestTemplate.queryForPage(queryBuilder.build(), SkuEs.class, new HighlightResultMapper());
-//        SearchHits<SkuEs> search = elasticsearchRestTemplate.search(queryBuilder.build(), SkuEs.class);
+//        Page<SkuEs> page = skuSearchMapper.search(queryBuilder.build());
+//        AggregatedPage<SkuEs> page = (AggregatedPage<SkuEs>) skuSearchMapper.search(queryBuilder.build());
+        AggregatedPage<SkuEs> page = elasticsearchRestTemplate.queryForPage(queryBuilder.build(), SkuEs.class, new HighlightResultMapper());
 
         // 转换获取结果集
         Map<String, Object> resultMap = new HashMap<>();
@@ -76,6 +77,37 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         resultMap.put("list", content);
         resultMap.put("totalElements", page.getTotalElements());
         return resultMap;
+    }
+
+    /**
+     * 分组查询
+     */
+    private void group(NativeSearchQueryBuilder queryBuilder, Map<String, Object> searchMap) {
+        //用户如果没有输入分类条件，则需要将分类搜索出来，作为条件提供给用户
+        if (org.springframework.util.StringUtils.isEmpty(searchMap.get("category"))) {
+            queryBuilder.addAggregation(
+                    AggregationBuilders
+                            .terms("categoryList")//别名，类似Map的key
+                            .field("categoryName.keyword")//根据categoryName域进行分组
+                            .size(100)      //分组结果显示100个
+            );
+        }
+        //用户如果没有输入品牌条件，则需要将品牌搜索出来，作为条件提供给用户
+        if (org.springframework.util.StringUtils.isEmpty(searchMap.get("brand"))) {
+            queryBuilder.addAggregation(
+                    AggregationBuilders
+                            .terms("brandList")//别名，类似Map的key
+                            .field("brandName.keyword")//根据brandName域进行分组
+                            .size(100)      //分组结果显示100个
+            );
+        }
+        //属性分组查询
+        queryBuilder.addAggregation(
+                AggregationBuilders
+                        .terms("attrmaps")//别名，类似Map的key
+                        .field("skuAttribute.keyword")//根据skuAttribute域进行分组
+                        .size(100000)      //分组结果显示100000个
+        );
     }
 
     /**
@@ -147,49 +179,6 @@ public class SkuSearchServiceImpl implements SkuSearchService {
     }
 
     /**
-     * 分组查询
-     */
-    private void group(NativeSearchQueryBuilder queryBuilder, Map<String, Object> searchMap) {
-        //用户如果没有输入分类条件，则需要将分类搜索出来，作为条件提供给用户
-        if (org.springframework.util.StringUtils.isEmpty(searchMap.get("category"))) {
-            queryBuilder.addAggregation(
-                    AggregationBuilders
-                            .terms("categoryList")//别名，类似Map的key
-                            .field("categoryName")//根据categoryName域进行分组
-                            .size(100)      //分组结果显示100个
-            );
-        }
-        //用户如果没有输入品牌条件，则需要将品牌搜索出来，作为条件提供给用户
-        if (org.springframework.util.StringUtils.isEmpty(searchMap.get("brand"))) {
-            queryBuilder.addAggregation(
-                    AggregationBuilders
-                            .terms("brandList")//别名，类似Map的key
-                            .field("brandName")//根据brandName域进行分组
-                            .size(100)      //分组结果显示100个
-            );
-        }
-        //属性分组查询
-        queryBuilder.addAggregation(
-                AggregationBuilders
-                        .terms("attrmaps")//别名，类似Map的key
-                        .field("skuAttribute")//根据skuAttribute域进行分组
-                        .size(100000)      //分组结果显示100000个
-        );
-    }
-
-    /**
-     * 分页参数
-     */
-    public int currentPage(Map<String, Object> searchMap) {
-        try {
-            Object page = searchMap.get("page");
-            return Integer.valueOf(page.toString()) - 1;
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    /**
      * 分组结果解析
      */
     public void parseGroup(Aggregations aggregations, Map<String, Object> resultMap) {
@@ -244,4 +233,15 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         }
     }
 
+    /**
+     * 分页参数
+     */
+    public int currentPage(Map<String, Object> searchMap) {
+        try {
+            Object page = searchMap.get("page");
+            return Integer.valueOf(page.toString()) - 1;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 }
