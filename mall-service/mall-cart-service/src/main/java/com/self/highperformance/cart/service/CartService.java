@@ -1,6 +1,15 @@
 package com.self.highperformance.cart.service;
 
+import com.self.highperformance.cart.model.Cart;
+
+import java.util.List;
+
 public interface CartService {
+
+    /**
+     * 查询购物车
+     */
+    List<Cart> list(String userName);
 
     /**
      * 加入购物车

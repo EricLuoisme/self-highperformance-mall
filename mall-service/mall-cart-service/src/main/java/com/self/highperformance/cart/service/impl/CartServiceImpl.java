@@ -7,7 +7,11 @@ import com.self.highperformance.goods.feign.SkuFeign;
 import com.self.highperformance.goods.model.Sku;
 import com.self.highperformance.util.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -18,6 +22,12 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private SkuFeign skuFeign;
 
+
+    @Override
+    public List<Cart> list(String userName) {
+        Cart cart = new Cart().setUserName(userName);
+        return cartMapper.findAll(Example.of(cart), Sort.by("_id"));
+    }
 
     /**
      * @param id       商品id
