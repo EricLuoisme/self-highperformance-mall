@@ -12,6 +12,11 @@ public interface CartService {
     List<Cart> list(String userName);
 
     /**
+     * 查询指定购物车id集合的列表
+     */
+    List<Cart> list(List<String> ids);
+
+    /**
      * 加入购物车
      *
      * @param id       商品id
@@ -21,4 +26,8 @@ public interface CartService {
      */
     void addCart(String id, String userName, Integer num);
 
+    /**
+     * 根据集合id删除购物车商品
+     */
+    void delCart(List<String> ids);
 }
