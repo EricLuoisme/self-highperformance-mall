@@ -24,7 +24,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public RespResult<Category> searchOne(@PathVariable("id") String id) {
+    public RespResult<Category> searchOne(@PathVariable("id") Integer id) {
         Category byId = categoryService.getById(id);
         return RespResult.ok(byId);
     }

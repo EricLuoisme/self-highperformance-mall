@@ -2,6 +2,7 @@ package com.self.highperformance.listener;
 
 import com.alibaba.fastjson.JSON;
 import com.self.highperformance.goods.model.Sku;
+import com.self.highperformance.page.feign.PageFeign;
 import com.self.highperformance.search.feign.SkuSearchFeign;
 import com.self.highperformance.search.model.SkuEs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,18 @@ import org.springframework.stereotype.Component;
 import top.javatool.canal.client.annotation.CanalTable;
 import top.javatool.canal.client.handler.EntryHandler;
 
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+
 @Component
 @CanalTable("sku")
 public class SkuHandler implements EntryHandler<Sku> {
 
     @Autowired
     private SkuSearchFeign skuSearchFeign;
+
+    @Autowired
+    private PageFeign pageFeign;
 
 
     @Override
@@ -24,6 +31,12 @@ public class SkuHandler implements EntryHandler<Sku> {
         if (1 == sku.getStatus()) {
             // 先把sku转换为JsonStr, 然后通过JsonStr转换为SkuEs对象
             skuSearchFeign.add(JSON.parseObject(JSON.toJSONString(sku), SkuEs.class));
+        }
+        // 静态html生成
+        try {
+            pageFeign.html(sku.getSpuId());
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 
@@ -37,6 +50,12 @@ public class SkuHandler implements EntryHandler<Sku> {
         // 如果商品状态仍然正常, 则add以实现更新
         if (1 == after.getStatus()) {
             skuSearchFeign.add(JSON.parseObject(JSON.toJSONString(after), SkuEs.class));
+        }
+        // 静态html生成
+        try {
+            pageFeign.html(after.getSpuId());
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
     }
 

@@ -8,7 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 // @EnableScheduling
 // 需要配置使用Feign调用远程的内容
-@EnableFeignClients(basePackages = {"com.self.highperformance.goods.feign", "com.self.highperformance.search.feign"})
+@EnableFeignClients(basePackages = {
+        "com.self.highperformance.page.feign",
+        "com.self.highperformance.goods.feign",
+        "com.self.highperformance.search.feign"})
 public class MallCanalApplication {
     public static void main(String[] args) {
         SpringApplication.run(MallCanalApplication.class, args);

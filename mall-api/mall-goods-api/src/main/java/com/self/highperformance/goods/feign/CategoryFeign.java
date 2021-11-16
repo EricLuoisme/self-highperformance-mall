@@ -15,5 +15,5 @@ public interface CategoryFeign {
     RespResult<List<Category>> list(@PathVariable("pid") Integer pid);
 
     @GetMapping("/category/{id}")
-    RespResult<Category> searchOne(@PathVariable("id") String id);
+    RespResult<Category> searchOne(@PathVariable("id") Integer id);
 }
