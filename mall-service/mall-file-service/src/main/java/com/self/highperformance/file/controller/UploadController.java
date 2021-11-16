@@ -1,6 +1,6 @@
 package com.self.highperformance.file.controller;
 
-import com.self.highperformance.resp.RespResult;
+import com.self.highperformance.util.RespResult;
 import com.self.highperformance.file.ceph.FileHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

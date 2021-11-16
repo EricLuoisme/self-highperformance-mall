@@ -2,7 +2,7 @@ package com.self.highperformance.goods.controller;
 
 import com.self.highperformance.goods.model.Category;
 import com.self.highperformance.goods.service.CategoryService;
-import com.self.highperformance.resp.RespResult;
+import com.self.highperformance.util.RespResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

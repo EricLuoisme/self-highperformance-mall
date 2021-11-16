@@ -1,6 +1,6 @@
 package com.self.highperformance.search.controller;
 
-import com.self.highperformance.resp.RespResult;
+import com.self.highperformance.util.RespResult;
 import com.self.highperformance.search.model.SkuEs;
 import com.self.highperformance.search.service.SkuSearchService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.self.highperformance.search.feign;
 
-import com.self.highperformance.resp.RespResult;
+import com.self.highperformance.util.RespResult;
 import com.self.highperformance.search.model.SkuEs;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;

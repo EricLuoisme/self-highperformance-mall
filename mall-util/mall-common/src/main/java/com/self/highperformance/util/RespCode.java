@@ -1,4 +1,4 @@
-package com.self.highperformance.resp;
+package com.self.highperformance.util;
 
 /**
  * 响应码

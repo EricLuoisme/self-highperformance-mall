@@ -1,7 +1,7 @@
 package com.self.highperformance.goods.feign;
 
 import com.self.highperformance.goods.model.Sku;
-import com.self.highperformance.resp.RespResult;
+import com.self.highperformance.util.RespResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

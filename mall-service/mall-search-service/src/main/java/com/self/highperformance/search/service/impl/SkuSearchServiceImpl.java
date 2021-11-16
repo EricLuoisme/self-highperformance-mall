@@ -5,6 +5,7 @@ import com.self.highperformance.search.mapper.SkuSearchMapper;
 import com.self.highperformance.search.model.SkuEs;
 import com.self.highperformance.search.service.SkuSearchService;
 import com.self.highperformance.search.util.HighlightResultMapper;
+import com.self.highperformance.util.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -13,6 +14,7 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,14 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         // 分组搜索
         group(queryBuilder, searchMap);
 
+        // 设置高亮信息, 关键词前后的标签, 设置高亮域
+        HighlightBuilder.Field field = new HighlightBuilder
+                .Field("name")  //根据指定的域进行高亮查询
+                .preTags("<span style=\"color:red;\">")     //关键词高亮前缀
+                .postTags("</span>")   //高亮关键词后缀
+                .fragmentSize(100);     //碎片长度
+        queryBuilder.withHighlightFields(field);
+
         // Mapper进行搜索
 //        Page<SkuEs> page = skuSearchMapper.search(queryBuilder.build());
 //        AggregatedPage<SkuEs> page = (AggregatedPage<SkuEs>) skuSearchMapper.search(queryBuilder.build());
@@ -75,7 +85,11 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         // 复制内容
         List<SkuEs> content = page.getContent();
         resultMap.put("list", content);
-        resultMap.put("totalElements", page.getTotalElements());
+
+        // 创建分页对象
+        int currentPage = queryBuilder.build().getPageable().getPageNumber() + 1;
+        PageInfo pageInfo = new PageInfo(page.getTotalElements(), currentPage, 5);
+        resultMap.put("pageInfo", pageInfo);
         return resultMap;
     }
 
