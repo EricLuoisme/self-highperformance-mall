@@ -16,6 +16,7 @@
         <module>mall-search-api</module>
         <module>mall-page-api</module>
         <module>mall-cart-api</module>
+        <module>mall-user-api</module>
     </modules>
 
     <description>
