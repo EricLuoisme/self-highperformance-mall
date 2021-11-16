@@ -3,42 +3,38 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>self-highperformance-mall</artifactId>
+        <artifactId>mall-service</artifactId>
         <groupId>com.highperformance</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
 
-    <modules>
-        <module>mall-goods-service</module>
-        <module>mall-file-service</module>
-        <module>mall-canal-service</module>
-        <module>mall-search-service</module>
-        <module>mall-cart-service</module>
-    </modules>
+    <artifactId>mall-cart-service</artifactId>
 
-    <artifactId>mall-service</artifactId>
-
-
-    <description>
-        For all micro-services
-    </description>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
     <dependencies>
-        <!-- jar dependency -->
+        <!-- MongoDB -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>2.2.10.RELEASE</version>
+        </dependency>
+
+        <!-- Apis -->
         <dependency>
             <groupId>com.highperformance</groupId>
-            <artifactId>mall-service-dependency</artifactId>
+            <artifactId>mall-cart-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.highperformance</groupId>
+            <artifactId>mall-goods-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <!-- tools dependency -->
-        <dependency>
-            <groupId>com.highperformance</groupId>
-            <artifactId>mall-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
-
 </project>

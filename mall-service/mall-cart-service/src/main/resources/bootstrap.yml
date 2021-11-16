@@ -1,0 +1,28 @@
+
+# ============================================== Spring + Nacos ============================================
+server:
+  port: 8087
+spring:
+  application:
+    name: mall-cart
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        # Nacos 自身地址
+        server-addr: 127.0.0.1:8848
+      discovery:
+        # Nacos 注册地址
+        server-addr: 127.0.0.1:8848
+  data:
+    # MongoDB配置
+    # usr:pwd@ip:port/schema
+    mongodb:
+      uri: mongodb://sh:123456@127.0.0.1:27017/shop
+  main:
+    allow-bean-definition-overriding: true
+
+# ================================================== 日志配置 ==================================================
+logging:
+  pattern:
+    console: "%msg%n"

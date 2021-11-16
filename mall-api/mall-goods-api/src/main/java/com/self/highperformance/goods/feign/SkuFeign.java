@@ -3,10 +3,7 @@ package com.self.highperformance.goods.feign;
 import com.self.highperformance.goods.model.Sku;
 import com.self.highperformance.util.RespResult;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +30,11 @@ public interface SkuFeign {
      */
     @DeleteMapping("/sku/aditems/type")
     RespResult delTypeItems(@RequestParam("id") Integer id);
+
+    /**
+     * skuId找到sku
+     */
+    @GetMapping("/sku/{id}")
+    RespResult<Sku> findBySkuId(@PathVariable("id") String id);
 
 }

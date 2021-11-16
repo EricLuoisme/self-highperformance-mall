@@ -24,6 +24,9 @@ public class SkuController {
         return skuService.typeSkuItems(id);
     }
 
+    /**
+     * 更新缓存
+     */
     @PutMapping("/aditems/type")
     public RespResult<List<Sku>> updTypeItems(@RequestParam("id") Integer id) {
         skuService.updTypeSkuItems(id);
@@ -37,5 +40,14 @@ public class SkuController {
     public RespResult delTypeItems(@RequestParam("id") Integer id) {
         skuService.delTypeSkuItems(id);
         return RespResult.ok();
+    }
+
+    /**
+     * 根据商品id获取商品详情
+     */
+    @GetMapping("/{id}")
+    public RespResult<Sku> findBySkuId(@PathVariable("id") String id) {
+        Sku byId = skuService.getById(id);
+        return RespResult.ok(byId);
     }
 }
