@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/category")
+@CrossOrigin
 public class CategoryController {
 
     @Autowired
@@ -22,5 +23,10 @@ public class CategoryController {
         return RespResult.ok(byParentId);
     }
 
+    @GetMapping("/{id}")
+    public RespResult<Category> searchOne(@PathVariable("id") String id) {
+        Category byId = categoryService.getById(id);
+        return RespResult.ok(byId);
+    }
 
 }

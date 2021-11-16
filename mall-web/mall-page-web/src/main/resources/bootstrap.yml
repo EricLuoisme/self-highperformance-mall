@@ -1,10 +1,8 @@
-
-# ========================================= Spring + Nacos + ElasticSearch  ===================================
 server:
-  port: 8084
+  port: 8086
 spring:
   application:
-    name: mall-search
+    name: mall-web-page
   cloud:
     nacos:
       config:
@@ -14,10 +12,15 @@ spring:
       discovery:
         # Nacos 注册地址
         server-addr: 127.0.0.1:8848
-  # Elasticsearch服务配置
-  elasticsearch:
-    rest:
-      uris: http://127.0.0.1:9200
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+
+  main:
+    allow-bean-definition-overriding: true
+
+# ================================================== 日志配置 ==================================================
+pagepath: D:/pages/items/
 
 # ================================================== 日志配置 ==================================================
 logging:

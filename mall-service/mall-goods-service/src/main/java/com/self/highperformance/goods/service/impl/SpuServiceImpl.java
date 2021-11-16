@@ -78,4 +78,18 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
             skuMapper.insert(sku);
         }
     }
+
+    @Override
+    public Product findBySpuId(String id) {
+
+        // 1. 查询spu
+        Spu spu = spuMapper.selectById(id);
+
+        // 2. 根据spu的id, 查询相关的sku集合
+        List<Sku> skus = skuMapper.selectList(
+                new QueryWrapper<Sku>().eq("spu_id", id));
+
+        // 3. 组装返回的Product对象
+        return new Product().setSpu(spu).setSkus(skus);
+    }
 }

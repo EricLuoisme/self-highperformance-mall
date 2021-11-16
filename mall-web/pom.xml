@@ -13,6 +13,7 @@
 
     <modules>
         <module>mall-search-web</module>
+        <module>mall-page-web</module>
     </modules>
 
     <description>
