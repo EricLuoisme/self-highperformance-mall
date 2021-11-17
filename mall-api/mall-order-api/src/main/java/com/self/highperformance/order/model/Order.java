@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//MyBatisPlus表映射注解
+// MyBatisPlus表映射注解
 @TableName(value = "order_info")
 public class Order implements Serializable {
 

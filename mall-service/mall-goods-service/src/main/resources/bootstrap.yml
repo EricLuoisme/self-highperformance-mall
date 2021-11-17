@@ -19,6 +19,10 @@ spring:
       discovery:
         # Nacos 注册地址
         server-addr: 127.0.0.1:8848
+    # Seata 分布式事务配置
+    alibaba:
+      seata:
+        tx-service-group: tx_shop
   redis:
     host: 127.0.0.1
     port: 6379

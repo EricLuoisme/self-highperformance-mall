@@ -12,6 +12,7 @@ import com.self.highperformance.order.model.Order;
 import com.self.highperformance.order.model.OrderSku;
 import com.self.highperformance.order.service.OrderService;
 import com.self.highperformance.util.RespResult;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,19 +34,23 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private SkuFeign skuFeign;
 
 
+    /**
+     * 下单操作流程跨服务, 使用Seata分布式事务机制
+     */
+    @GlobalTransactional
     @Override
     public Boolean addOrder(Order order) {
-        // 1. 查询购物车数据
+        // 1. 查询购物车数据 (查询 mall-cart-service 微服务, 查询操作主要确定购物车内容, )
         RespResult<List<Cart>> cartResp = cartFeign.list(order.getCartIds());
         List<Cart> cartList = cartResp.getData();
         if (null == cartList || cartList.size() == 0) {
             return false;
         }
 
-        // 2. 库存递减
+        // 2. 库存递减 (操作 mall-goods-service 微服务)
         skuFeign.dcount(cartList);
 
-        // 3. 添加订单明细
+        // 3. 添加订单明细 (操作 mall-order-service 微服务 LOCAL)
         int totalNum = 0;
         int moneys = 0;
         for (Cart cart : cartList) {
@@ -62,7 +67,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             moneys += orderSku.getMoney();
         }
 
-        // 4. 添加订单
+        // 4. 添加订单 (操作 mall-order-service 微服务 LOCAL)
         order.setTotalNum(totalNum);
         order.setMoneys(moneys);
         orderMapper.insert(order);

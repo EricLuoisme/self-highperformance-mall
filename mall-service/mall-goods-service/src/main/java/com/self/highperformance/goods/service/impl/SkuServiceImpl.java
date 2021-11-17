@@ -8,11 +8,13 @@ import com.self.highperformance.goods.mapper.SkuMapper;
 import com.self.highperformance.goods.model.AdItems;
 import com.self.highperformance.goods.model.Sku;
 import com.self.highperformance.goods.service.SkuService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +29,8 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     private SkuMapper skuMapper;
 
 
+    // 添加本地回滚
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void dcount(List<Cart> carts) {
         /**
@@ -37,6 +41,7 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
             if (dcount <= 0) {
                 throw new RuntimeException("Out Of Stock");
             }
+            System.out.println("Sku:" + cart.getSkuId() + "'s Stock decreased to " + dcount);
         }
     }
 
