@@ -3,7 +3,6 @@ package com.self.highperformance.pay.controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.self.highperformance.pay.model.PayLog;
-import com.self.highperformance.pay.service.PayLogService;
 import com.self.highperformance.util.RespResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -48,3 +48,10 @@ mybatis-plus:
 logging:
   pattern:
     console: "%msg%n"
+
+# ============================================= RocketMQ Consumer =================================================
+rocketmq:
+  name-server: 127.0.0.1:9876
+
+
+
