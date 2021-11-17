@@ -2,6 +2,7 @@ package com.self.highperformance.goods.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.self.highperformance.cart.model.Cart;
 import com.self.highperformance.goods.mapper.AdItemsMapper;
 import com.self.highperformance.goods.mapper.SkuMapper;
 import com.self.highperformance.goods.model.AdItems;
@@ -24,6 +25,20 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
 
     @Autowired
     private SkuMapper skuMapper;
+
+
+    @Override
+    public void dcount(List<Cart> carts) {
+        /**
+         * 需要进行循环操作, 因为批量操作某个操作受影响行数为0也不会继续
+         */
+        for (Cart cart : carts) {
+            int dcount = skuMapper.dcount(cart.getSkuId(), cart.getNum());
+            if (dcount <= 0) {
+                throw new RuntimeException("Out Of Stock");
+            }
+        }
+    }
 
     // 开启缓存, 一级缓存命名空间为ad-items-skus, 可以使用id
     @Cacheable(cacheNames = "ad-items-skus", key = "#id")

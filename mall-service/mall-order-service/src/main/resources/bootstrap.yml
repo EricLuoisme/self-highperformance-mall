@@ -1,0 +1,46 @@
+
+# ============================================== Spring + Nacos ============================================
+server:
+  port: 8089
+spring:
+  application:
+    name: mall-order
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop_order?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+        # Nacos 自身地址
+        server-addr: 127.0.0.1:8848
+      discovery:
+        # Nacos 注册地址
+        server-addr: 127.0.0.1:8848
+  main:
+    allow-bean-definition-overriding: true
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 600000
+
+# ================================================== Mybatis Plus ==================================================
+mybatis-plus:
+  # 复杂sql对应的xml文件的位置
+  mapper-locations: mapper/*.xml
+  # 指定javaBean别名的包
+  type-aliases-package: com.self.highperformance.*.model
+  configuration:
+    # 开启驼峰命名
+    map-underscore-to-camel-case: true
+    # 开启日志方便测试
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# ================================================== 日志配置 ==================================================
+logging:
+  pattern:
+    console: "%msg%n"

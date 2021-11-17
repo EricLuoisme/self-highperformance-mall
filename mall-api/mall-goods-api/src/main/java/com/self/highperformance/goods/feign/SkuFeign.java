@@ -1,5 +1,6 @@
 package com.self.highperformance.goods.feign;
 
+import com.self.highperformance.cart.model.Cart;
 import com.self.highperformance.goods.model.Sku;
 import com.self.highperformance.util.RespResult;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -37,4 +38,9 @@ public interface SkuFeign {
     @GetMapping("/sku/{id}")
     RespResult<Sku> findBySkuId(@PathVariable("id") String id);
 
+    /**
+     * 库存递减
+     */
+    @PostMapping("/sku/dcount")
+    RespResult dcount(@RequestBody List<Cart> carts);
 }

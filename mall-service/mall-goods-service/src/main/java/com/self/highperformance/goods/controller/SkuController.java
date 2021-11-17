@@ -1,5 +1,6 @@
 package com.self.highperformance.goods.controller;
 
+import com.self.highperformance.cart.model.Cart;
 import com.self.highperformance.goods.model.Sku;
 import com.self.highperformance.goods.service.SkuService;
 import com.self.highperformance.util.RespResult;
@@ -49,5 +50,14 @@ public class SkuController {
     public RespResult<Sku> findBySkuId(@PathVariable("id") String id) {
         Sku byId = skuService.getById(id);
         return RespResult.ok(byId);
+    }
+
+    /**
+     * 库存递减
+     */
+    @PostMapping("/dcount")
+    public RespResult dcount(@RequestBody List<Cart> carts) {
+        skuService.dcount(carts);
+        return RespResult.ok();
     }
 }

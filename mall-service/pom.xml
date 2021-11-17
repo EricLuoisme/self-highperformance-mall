@@ -8,6 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>mall-service</artifactId>
     <packaging>pom</packaging>
 
     <modules>
@@ -17,10 +18,8 @@
         <module>mall-search-service</module>
         <module>mall-cart-service</module>
         <module>mall-user-service</module>
+        <module>mall-order-service</module>
     </modules>
-
-    <artifactId>mall-service</artifactId>
-
 
     <description>
         For all micro-services

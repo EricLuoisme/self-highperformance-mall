@@ -8,17 +8,12 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>mall-goods-api</artifactId>
 
-    <description>
-        For APIs related to shop_goods
-    </description>
+    <artifactId>mall-order-api</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.highperformance</groupId>
-            <artifactId>mall-cart-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
 </project>
