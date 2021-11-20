@@ -12,7 +12,7 @@ import java.util.Map;
 @Data
 // indexName 对应索引名称
 // skues 对应当前表名称
-@Document(indexName = "shopsearch", type = "_doc")
+@Document(indexName = "shopsearch")
 public class SkuEs {
 
     @Id
